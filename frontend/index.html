@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notas MEI — Organizador local com Gemma</title>
+<style>
+  :root { --bg:#0f172a; --card:#1e293b; --acc:#22c55e; --txt:#e2e8f0; --mut:#94a3b8; }
+  * { box-sizing:border-box; } body { margin:0; font-family:system-ui,Segoe UI,Roboto,Arial; background:var(--bg); color:var(--txt); }
+  header { padding:24px; text-align:center; }
+  .badge { display:inline-block; background:#052e16; color:var(--acc); border:1px solid var(--acc); border-radius:999px; padding:6px 14px; font-size:13px; margin-top:8px; }
+  main { max-width:900px; margin:0 auto; padding:0 16px 60px; display:grid; gap:16px; }
+  .card { background:var(--card); border-radius:12px; padding:20px; }
+  h1 { margin:0; font-size:26px; } p.sub { color:var(--mut); margin:6px 0 0; }
+  #drop { border:2px dashed #334155; border-radius:12px; padding:28px; text-align:center; cursor:pointer; color:var(--mut); }
+  #drop:hover { border-color:var(--acc); color:var(--txt); }
+  button { background:var(--acc); border:0; border-radius:8px; padding:10px 18px; font-weight:700; cursor:pointer; }
+  table { width:100%; border-collapse:collapse; font-size:14px; } th,td { padding:8px; border-bottom:1px solid #334155; text-align:left; }
+  .row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  input[type=month] { background:#0f172a; color:var(--txt); border:1px solid #334155; border-radius:8px; padding:8px; }
+  .total { font-size:28px; font-weight:800; } small { color:var(--mut); }
+</style>
+</head>
+<body>
+<header>
+  <h1>🧾 Notas MEI</h1>
+  <p class="sub">Organize notas fiscais e recibos sem mandar nada para a nuvem.</p>
+  <div class="badge">🔒 100% offline · Gemma via Ollama · R$ 0 de API</div>
+</header>
+<main>
+  <div class="card">
+    <h3>1. Envie foto ou PDF da nota</h3>
+    <div id="drop">Arraste o arquivo aqui ou clique para escolher<input type="file" id="file" hidden accept=".png,.jpg,.jpeg,.webp,.pdf,.txt"></div>
+    <p><small id="status">Pronto para receber.</small></p>
+  </div>
+  <div class="card">
+    <h3>2. Resumo mensal</h3>
+    <div class="row">
+      <input type="month" id="mes" value="2026-10">
+      <button onclick="carregarResumo()">Atualizar</button>
+    </div>
+    <p class="total" id="total">R$ 0,00</p>
+    <div id="cats"></div>
+  </div>
+  <div class="card">
+    <h3>3. Lançamentos</h3>
+    <table><thead><tr><th>Fornecedor</th><th>Data</th><th>Categoria</th><th>Valor</th></tr></thead>
+    <tbody id="lista"></tbody></table>
+  </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

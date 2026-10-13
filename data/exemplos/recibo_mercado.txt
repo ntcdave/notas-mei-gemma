@@ -1,0 +1,12 @@
+Mercado Pague Menos
+Av. Brasil, 123 - Centro, Rio Branco/AC
+CNPJ 00.111.222/0001-33
+05/10/2026 14:32
+Arroz 5kg ............ R$ 42,90
+Feijao 2kg ........... R$ 18,50
+Cafe 500g ............ R$ 21,50
+Oleo de soja ......... R$ 12,90
+Frango 2kg ........... R$ 45,90
+Queijo mussarela ..... R$ 46,20
+TOTAL R$ 187,90
+Pagamento: PIX
