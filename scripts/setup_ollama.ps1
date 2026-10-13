@@ -5,7 +5,7 @@
 #>
 $ErrorActionPreference = "Stop"
 $Model = $env:OLLAMA_MODEL
-if (-not $Model) { $Model = "gemma3n:e4b" }
+if (-not $Model) { $Model = "gemma4:e2b" }
 
 Write-Host "== Notas MEI: setup ambiente local ==" -ForegroundColor Green
 

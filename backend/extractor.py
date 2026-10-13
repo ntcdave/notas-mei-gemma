@@ -1,7 +1,8 @@
 """Pipeline de extracao: arquivo -> OCR -> Gemma (Ollama) -> JSON validado.
 
 Funciona em 2 modos:
-1. ONLINE (Gemma): chama Ollama em http://localhost:11434/api/chat com model gemma3n:e4b.
+1. ONLINE (Gemma): chama Ollama em http://localhost:11434/api/chat com model gemma4:e2b
+   (padrao; override com OLLAMA_MODEL=gemma3n:e4b se preferir).
 2. OFFLINE/FALLBACK: parser heuristicos por regex (para testes, CI e demo sem GPU).
 """
 from __future__ import annotations
@@ -17,7 +18,7 @@ import httpx
 from .prompts import CATEGORIAS_VALIDAS, SYSTEM_PROMPT, USER_TEMPLATE
 
 OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
-OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "gemma3n:e4b")
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "gemma4:e2b")
 
 VALOR_RE = re.compile(r"(?:R\$\s*)?(\d{1,3}(?:\.\d{3})*,\d{2}|\d+\.\d{2}|\d+,\d{2})")
 DATA_RE = re.compile(r"(\d{2})/(\d{2})/(\d{4})")

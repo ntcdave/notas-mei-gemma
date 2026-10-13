@@ -1,6 +1,6 @@
 # 🧾 Notas MEI — organizador local de recibos com Gemma
 
-MEI e freelancer fotografam notas e recibos → a ferramenta extrai **fornecedor, data, valor e categoria** e gera o **resumo mensal de gastos**. Tudo **100% no notebook**: modelo open-weight **Gemma (`gemma3n:e4b`) via Ollama**, OCR local (Tesseract), banco **SQLite**. Nenhum dado vai para a nuvem. Custo de API: **R$ 0**.
+MEI e freelancer fotografam notas e recibos → a ferramenta extrai **fornecedor, data, valor e categoria** e gera o **resumo mensal de gastos**. Tudo **100% no notebook**: modelo open-weight **Gemma (`gemma4:e2b`) via Ollama**, OCR local (Tesseract), banco **SQLite**. Nenhum dado vai para a nuvem. Custo de API: **R$ 0**.
 
 > Feito para o DEV **Hacktoberfest Open-Source AI Challenge — Week 2: Side Hustle**. Categoria: **Best Use of Gemma**.
 
@@ -25,9 +25,12 @@ Pipeline híbrida de propósito: OCR cuida da leitura bruta (rápido em CPU) e a
 ```powershell
 # 1. Baixe o Ollama: https://ollama.com/download
 # 2. Depois:
-ollama pull gemma3n:e4b
-ollama run gemma3n:e4b "Responda apenas: OK"
+ollama pull gemma4:e2b
+ollama run gemma4:e2b "Responda apenas: OK"
 ```
+
+> Alternativa: `OLLAMA_MODEL=gemma3n:e4b` também funciona (maior, mais lento em CPU).
+> Benchmark dos dois: `python scripts/bench_models.py`.
 
 Ou rode `powershell -ExecutionPolicy Bypass -File scripts\setup_ollama.ps1`.
 
@@ -77,7 +80,7 @@ docs/      → roteiro de demo
 ## Limitações honestas
 
 - OCR sofre com foto borrada/torta — o app avisa a confiança da extração.
-- Gemma `e4b` em CPU leva ~20–60s na primeira extração; depois reaproveita o modelo carregado.
+- Gemma `4:e2b` em CPU leva ~30 s na primeira extração (carregamento do modelo); depois reaproveita o modelo carregado.
 - Perguntas em linguagem natural sobre gastos ("quanto gastei com material em setembro?") estão no roadmap, fora do MVP.
 
 ## Licença

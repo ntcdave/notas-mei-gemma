@@ -12,7 +12,7 @@ Every month the ritual is the same: spread the papers on the table, squint at fa
 **Notas MEI** flips that deal. It's a receipt and invoice organizer that runs **100% on your own laptop**:
 
 - 📸 Snap a photo (or drop a PDF) of any receipt or nota fiscal
-- 🧠 **Gemma (`gemma3n:e4b`) via Ollama** reads it and extracts supplier, date, amount and category as structured JSON
+- 🧠 **Gemma (`gemma4:e2b`) via Ollama** reads it and extracts supplier, date, amount and category as structured JSON
 - 📊 You get a clean monthly spending summary — no spreadsheet typing
 - 🔒 **Nothing ever leaves the machine.** No API key, no per-token billing, no cloud copy of your finances
 
@@ -38,7 +38,7 @@ Everything a judge needs to reproduce: `scripts/setup_ollama.ps1` (model downloa
 
 # How I Built It
 
-**The model: Gemma 3n E4B, and why it fits.** I needed a Portuguese-capable, multimodal-class open-weight model that survives on a 16 GB CPU-only notebook. `gemma3n:e4b` is the sweet spot: small enough to load locally (~4 GB), strong enough to normalize messy Brazilian receipts — converting `05/10/2026 → 2026-10-05`, `R$ 1.234,56 → 1234.56`, and picking the right category from supplier names. Temperature 0.1 + Ollama `format: json` keeps output machine-parseable, and a Pydantic-side validator clamps anything the model invents.
+**The model: Gemma 4 E2B — chosen by benchmark, not by hype.** I started on `gemma3n:e4b`, then `gemma4:e2b` landed and I ran both against real sample receipts (`scripts/bench_models.py`). Gemma 4 won on every axis that matters here: ~30 s vs 2+ min cold-start on a CPU-only notebook, correct extraction with 0.98 confidence, plus vision, tools and 128k context headroom for phase 2 (direct photo reading, natural-language questions over spending). Temperature 0.1 + Ollama `format: json` keeps output machine-parseable, and a Pydantic-side validator clamps anything the model invents.
 
 **The architecture decision I'm proudest of: the hybrid pipeline.** Pure vision-to-JSON sounds elegant but is slow and fragile on CPU with crooked phone photos. So the pipeline is:
 
@@ -70,4 +70,4 @@ _(leave blank — fill after showing the MVP to one real MEI in Acre this week.)
 
 # Prize Categories
 
-**Best Use of Gemma** 🏆 — Gemma is not a chatbot bolted on here; it *is* the product's brain: the structured-extraction reasoner, the Portuguese normalizer, the categorizer, all running locally as `gemma3n:e4b` through Ollama with zero cloud dependency.
+**Best Use of Gemma** 🏆 — Gemma is not a chatbot bolted on here; it *is* the product's brain: the structured-extraction reasoner, the Portuguese normalizer, the categorizer, all running locally as `gemma4:e2b` through Ollama with zero cloud dependency.
