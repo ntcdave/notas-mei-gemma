@@ -30,7 +30,7 @@ The 10-second version: drag a market receipt for **R$ 187,90** → Gemma returns
 
 # Code
 
-> 🔗 Repository: _(paste your GitHub URL after pushing — e.g. https://github.com/ntcdave/notas-mei-gemma)_
+> 🔗 Repository: https://github.com/ntcdave/notas-mei-gemma
 >
 > License: MIT. Stack: Python FastAPI · SQLite · vanilla HTML/JS · Tesseract OCR · Ollama + Gemma 3n E4B.
 
